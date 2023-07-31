@@ -184,9 +184,7 @@ class TxScrapper:
             normal_txs = get_normal_txs_by_address(self.address, start_block=self.target_block, end_block='latest', api_key=api_key)
             internal_txs = get_internal_txs_by_address(self.address, start_block=self.target_block, end_block='latest', api_key=api_key)  
 
-
             self.print_normal_txs(normal_txs, self.target_block, self.num_txs_to_print, printed_txs)
-
             self.print_internal_txs(internal_txs, self.target_block, self.num_txs_to_print, printed_txs)
 
 def main():
