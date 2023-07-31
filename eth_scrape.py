@@ -197,7 +197,6 @@ class TxScrapper:
             self.print_internal_txs(internal_txs, self.target_block, self.num_txs_to_print, printed_txs)
 
 def main():
-
     parser = OptionParser()
     msg = "Target address"
     parser.add_option("-a", "--address", dest="address", help="[ Requeired ] Target address")
@@ -205,11 +204,8 @@ def main():
     parser.add_option("-x", "--api", dest="api_key", help="[ Requeired ] API key")
     parser.add_option("-t", "--txhash", dest="tx_hash", default="" , help="Target TX hash")
     parser.add_option("-n", "--numTxs", dest="num_txs_to_print", default=3, help="Number of transactions to print")
-
     parser.add_option("-b", "--sBlock", dest="target_block", default=(int(currentBlock)-10000000) ,help="Target start block number")
-
     (options, args) = parser.parse_args()
-
 
     if not options.api_key:
         parser.error('API key not given')
