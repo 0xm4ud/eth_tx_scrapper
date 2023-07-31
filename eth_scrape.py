@@ -1,4 +1,4 @@
-# (0xm4ud) 2023 - 0xmaud.github.io 
+# (0xm4ud) 2023 - 0xm4ud.github.io 
 # 0xm4ud Eth_scrapper
 
 import requests
