@@ -16,6 +16,8 @@ normal = '\x1b[0m'
 printed_txs = 0
 
 #Current block number, an approximation of the latest block mined in case no block number is specified
+# tool will subtract 10000000 blocks from the current block number unless you specify a block number
+#use -b or --sBlock to specify a block number
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
 }
