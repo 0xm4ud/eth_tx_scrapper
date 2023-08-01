@@ -11,22 +11,30 @@ yellow = '\x1b[0;33m'
 red ='\x1b[0;31m'
 normal = '\x1b[0m'
 
+
 #target_block = 8660077
+# Define the number of transactions to print
+#num_txs_to_print = 3
 # Initialize a counter for the number of printed transactions
 printed_txs = 0
 
 #Current block number, an approximation of the latest block mined in case no block number is specified
 # tool will subtract 10000000 blocks from the current block number unless you specify a block number
 #use -b or --sBlock to specify a block number
-headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
-}
+def getRelevantBlock():
+    # Func is a little hack to get a initial near the latest relevant block
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
+    }
 
-response = requests.get('https://etherscan.io/blocks', headers=headers)
-soup = BeautifulSoup(response.text, 'html.parser')
-div = soup.find(lambda tag: tag.name == 'div' and "Showing blocks between" in tag.text)
-block_text = div.text
-currentBlock = block_text.split('#')[1].split(' ')[0]
+    response = requests.get('https://etherscan.io/blocks', headers=headers)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    div = soup.find(lambda tag: tag.name == 'div' and "Showing blocks between" in tag.text)
+    block_text = div.text
+    currentBlock = block_text.split('#')[1].split(' ')[0]
+    return currentBlock
+
+currentBlock = getRelevantBlock()
 
 def get_current_block_number(api_key):
     url = f"https://api.etherscan.io/api?module=proxy&action=eth_blockNumber&apikey={api_key}"
@@ -166,10 +174,8 @@ class TxScrapper:
         print(red,"\rEnd of Internal Transactions",normal) # how do I color this? 
         print(red,"\r==================================",normal,"\r\n")
 
-
     def start_scrapping(self):
         api_key = self.api_key
-        #currentBlock = get_current_block_number(api_key)
         if len(self.tx_hash) != 0:
             tx_hash = self.tx_hash
             if tx_hash.startswith('0x'):
@@ -199,6 +205,7 @@ class TxScrapper:
             self.print_internal_txs(internal_txs, self.target_block, self.num_txs_to_print, printed_txs)
 
 def main():
+    currentBlock = getRelevantBlock()
     parser = OptionParser()
     msg = "Target address"
     parser.add_option("-a", "--address", dest="address", help="[ Requeired ] Target address")
@@ -207,6 +214,7 @@ def main():
     parser.add_option("-t", "--txhash", dest="tx_hash", default="" , help="Target TX hash")
     parser.add_option("-n", "--numTxs", dest="num_txs_to_print", default=3, help="Number of transactions to print")
     parser.add_option("-b", "--sBlock", dest="target_block", default=(int(currentBlock)-10000000) ,help="Target start block number")
+
     (options, args) = parser.parse_args()
 
     if not options.api_key:
