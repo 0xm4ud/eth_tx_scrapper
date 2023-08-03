@@ -208,9 +208,9 @@ def main():
     currentBlock = getRelevantBlock()
     parser = OptionParser()
     msg = "Target address"
-    parser.add_option("-a", "--address", dest="address", help="[ Requeired ] Target address")
+    parser.add_option("-a", "--address", dest="address", help="[ Required ] Target address")
     msg = "API to be used"
-    parser.add_option("-x", "--api", dest="api_key", help="[ Requeired ] API key")
+    parser.add_option("-x", "--api", dest="api_key", help="[ Required ] API key")
     parser.add_option("-t", "--txhash", dest="tx_hash", default="" , help="Target TX hash")
     parser.add_option("-n", "--numTxs", dest="num_txs_to_print", default=3, help="Number of transactions to print")
     parser.add_option("-b", "--sBlock", dest="target_block", default=(int(currentBlock)-10000000) ,help="Target start block number")
