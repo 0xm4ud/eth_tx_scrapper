@@ -1,7 +1,7 @@
 # eth_tx_scrapper
 
 ```
-With the command line tool, retrieve Etherscan TX data from a specific address or specific TX.  
+retrieve Etherscan TX data from a specific address or specific TX with cli.  
 ```
 
 
