@@ -6,7 +6,7 @@ retrieve Etherscan TX data from a specific address or specific TX with cli.
 
 
 ```
-Usage: test64.py [options]
+Usage: script.py [options]
 
 Options:
   -h, --help            show this help message and exit
